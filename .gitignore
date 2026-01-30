@@ -2,3 +2,9 @@
 .DS_Store
 .vscode/
 .vscode/*
+
+# ------ LaTeX ------
+homework/*/*
+# allow tex and pdf
+!homework/*/main.pdf
+!homework/*/main.tex
