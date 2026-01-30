@@ -1,0 +1,125 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx, amsmath, amsthm, amssymb, enumitem, lipsum}
+
+\setlist[enumerate]{leftmargin=1.25cm}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\rotvert}{\rotatebox[origin=c]{90}{$\vert$}}
+
+\newenvironment{note}[2][Note]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{fact}[2][Fact]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{definition}[2][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{proposition}[2][Proposition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{principle}[2][Principle]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{envsection}[1]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+
+\begin{document}
+\setlength{\abovedisplayskip}{4pt}
+\setlength{\belowdisplayskip}{4pt}
+
+
+\begin{center}
+    \Large{\textbf{Homework 1}}
+\end{center}
+\vspace{10pt}
+
+\begin{envsection}{Read.}
+    Rogers and Girolami, Sections 1.1 - 1.3  
+\end{envsection}
+
+\begin{envsection}{Problem 1.}
+    Rogers and Girolami, Exercise 1.3
+\end{envsection}
+
+\begin{envsection}{Problem 2 (Matrix Transposes).}
+    We often denote the set of all $m \times n$ matrices with entries from $\R$ by $M_{m \times n}(\R)$, or simply $M_n(\R)$ if $m=n$. Prove that for $A \in M_{m \times k}(\R)$ and $B \in M_{k \times n}(\R)$, $(AB)^T = B^TA^T$.\\
+    \\
+    \textit{Hint:} More precisely, show that $((AB)^T)_{ij} = (B^TA^T)_{ij}$ for any $i,j$. Use the definitions from Comments 1.6 and 1.7 in Section 1.3.
+\end{envsection}
+
+\begin{envsection}{Problem 3 (Matrix Calculus).}
+    Let's prove the identities that are taken for granted in Table 1.4... Recall that for a function $\mathcal{L} : \R^n \to \R$, we define its \textit{$i$'th partial derivative} to be the function $\frac{\partial \mathcal{L}}{\partial \theta_i}: \R^n \to \R$ given by
+    \[
+    \frac{\partial \mathcal{L}}{\partial \theta_i}(\theta) = \lim_{h \to 0} \frac{\mathcal{L}(\theta + he_i) - \mathcal{L}(\theta)}{h}
+    \]
+    if the limit exists, where $e_i \in \R^n$ is the $i$'th unit vector. Define $\mathcal{L}$'s \textit{gradient} as the function $\nabla \mathcal{L}: \R^n \to \R^n$ given by
+    \[
+    \nabla \mathcal{L}(\theta) =
+    \begin{bmatrix}
+        \frac{\partial \mathcal{L}}{\partial \theta_1}(\theta)\vspace{2pt}\\
+        \frac{\partial \mathcal{L}}{\partial \theta_2}(\theta)\\
+        \vdots\\
+        \frac{\partial \mathcal{L}}{\partial \theta_n}(\theta)\\
+    \end{bmatrix}.
+    \]
+    We also sometimes notate the gradient by $\frac{\partial\mathcal{L}}{\partial\theta}: \R^n \to \R^n$. Fix $b \in \R^n$ and $A \in M_{n}(\R)$. Verify the following:
+    \begin{enumerate}
+        \item[(a)] For $\mathcal{L}(\theta) = \theta^T\theta$,\; $\nabla \mathcal{L}(\theta) = 2\theta$.
+        \item[(b)] For $\mathcal{L}(\theta) = \theta^Tb = b^T\theta$ ,\; $\nabla \mathcal{L}(\theta) = b$
+        \item[(c)] For $\mathcal{L}(\theta) = \theta^T A \theta$,\; $\nabla \mathcal{L}(\theta) = (A+A^T)\theta$. What if $A$ is symmetric?
+    \end{enumerate}
+    
+\end{envsection}
+
+\begin{envsection}{Problem 4 (Normal Equations).}
+    In this problem, we'll generalize the computations from Section 1.3 for a multiple linear regression model with $d$ parameters. Here, we are given training inputs $x^{(i)} \in \R^d$ for $1 \leq i \leq N$ and a vector $y \in \R^N$ containing the target value $y^{(i)}$ for each input. We define the \textit{design matrix} $X$ to be the $N \times d$ matrix containing the training inputs in its rows:
+    \[
+    X =
+    \begin{bmatrix}
+        \rotvert\; (x^{(1)})^T \;\rotvert\\
+        \rotvert\; (x^{(2)})^T \;\rotvert\vspace{-3pt}\\
+        \vdots \vspace{3pt}\\
+        \rotvert\; (x^{(N)})^T \;\rotvert
+    \end{bmatrix}, \qquad
+    y = 
+    \begin{bmatrix}
+        y^{(1)}\\
+        y^{(2)}\vspace{-3pt}\\
+        \vdots\vspace{3pt}\\
+        y^{(N)}
+    \end{bmatrix}.
+    \]
+    As before, we want to find a parameter vector $\theta \in \R^d$ to minimize the mean squared error loss function $\mathcal{L}: \R^d \to \R$ of our model:
+    \[
+    \mathcal{L}(\theta) = \frac{1}{N} \sum_{i = 1}^N (\theta^Tx^{(i)} - y^{(i)})^2.
+    \] 
+    \begin{enumerate}
+        \item[(a)] The \textit{euclidean norm} of a vector $a \in \R^n$ is defined to be $\lVert a \rVert_2 = \sqrt{\sum_{i=1}^n a_i^2}$. Use the euclidean norm to show that $\mathcal{L}(\theta) = \frac{1}{N} (X\theta - y)^T(X\theta - y)$. \textit{Hint:} You probably don't want to expand this... Notice that $a^Ta = \lVert a \rVert_2^2$.
+        \item[(b)] Use part (a) and the results from Problems 2 and 3 to compute $\nabla\mathcal{L}(\theta)$. Set the result to 0 and solve for $\theta$ to obtain the generalized version of Equation 1.16, otherwise known as the \textit{normal equations}:
+            \[
+            \theta = (X^TX)^{-1}X^Ty.
+            \]
+    \end{enumerate}
+    
+    
+\end{envsection}
+
+\end{document}
