@@ -1,0 +1,81 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx, amsmath, amsthm, amssymb, enumitem, lipsum}
+\usepackage[]{hyperref}
+
+\setlist[enumerate]{leftmargin=1.25cm}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\rotvert}{\rotatebox[origin=c]{90}{$\vert$}}
+
+\newenvironment{note}[2][Note]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{fact}[2][Fact]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{definition}[2][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{proposition}[2][Proposition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{principle}[2][Principle]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{envsection}[1]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+
+\begin{document}
+\setlength{\abovedisplayskip}{4pt}
+\setlength{\belowdisplayskip}{4pt}
+
+
+\begin{center}
+    \Large{\textbf{Homework 3}}\\
+    \normalsize February 12 - 19
+\end{center}
+\vspace{10pt}
+
+\subsection*{Reading}
+
+Feel free to just casually skim/read the following---no need to take notes unless you want to. The readings are meant to complement what we've done so far and should be interesting and enjoyable more than anything.
+
+\begin{envsection}{1.}
+    Read \href{http://www.incompleteideas.net/IncIdeas/BitterLesson.html}{The Bitter Lesson} by Rich Sutton.
+\end{envsection}
+
+\begin{envsection}{2. Probabilistic Machine Learning:}
+    Sections 8.4.1 and 8.4.2 on SGD. The rest of 8.4 is pretty advanced but there looks to be some cool stuff in there---feel free to look around and skim anything that looks interesting.
+\end{envsection}
+
+\begin{envsection}{3. CS229 Notes:}
+    Read Chapter 8, the introduction and 8.1 (no need to read 8.1.1, unless you're interested). This talks a bit more in depth about generalization and the bias-variance tradeoff, which we read a bit about in R+G 1.5.
+\end{envsection}
+
+
+
+% \subsection*{Problems}
+
+% \begin{envsection}{Problem 1.}
+    
+% \end{envsection}
+
+
+\end{document}
