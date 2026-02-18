@@ -6,6 +6,5 @@
 
 ## Online References:
 
-(will update as we go)
 
-- 
+- <a href="http://www.incompleteideas.net/IncIdeas/BitterLesson.html">"The Bitter Lesson"</a> - Rich Sutton
