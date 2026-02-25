@@ -82,9 +82,98 @@
 
 \subsection*{Problems}
 
-\begin{envsection}{Problem 1.}
-    
+\begin{envsection}{Problem 1 (Conditional Probability).}
+    Let $X,Y,Z$ be random variables.\vspace{-3pt}
+    \begin{enumerate}
+        \item[(a)] Prove the identity $\displaystyle p(x \mid y,z) = \frac{p(x,y \mid z)}{p(y \mid z)}$.\vspace{-3pt}
+        \item[(b)] We say two random variables $A$ and $B$ are \textit{conditionally independent} on the random variable $C$ if $p(a,b \mid c) = p(a \mid c) \cdot p(b \mid c)$. If $X$ and $Y$ are conditionally independent on $Z$, show that
+            \[
+            p(x \mid y,z) = p(x \mid z).
+            \]
+            \textit{Hint:} Use part (a).
+    \end{enumerate}
 \end{envsection}
+
+\begin{envsection}{Problem 2.}
+    R+G gives the identities on the top of page 69 without much justification. In this problem we'll prove them ourselves. Put $n = 1960$ for brevity. As the book mentions, we need to operate under the following independence assumptions:
+    \begin{enumerate}
+        \item[1.] All targets $t_i$ are conditionally independent on the joint input distribution $(\mathbf{x_n}, \mathbf{X})$
+        \item[2.] The targets $\mathbf{t}$ and the input $\mathbf{x_n}$ are conditionally independent on the remaining input $\mathbf{X}$.
+        \item[3.] The target $t_n$ and the inputs $\mathbf{X}$ are conditionally independent on the single input $\mathbf{x_n}$
+    \end{enumerate}
+    Under these assumptions, prove the following.
+    \begin{enumerate}
+        \item[(a)] $\displaystyle p(t_{n} \mid \mathbf{x}_{n},\mathbf{X, t}) = \frac{p(t_{n}, \mathbf{t \mid x}_{n}, \mathbf{X})}{p(\mathbf{t \mid X})}.$
+        \item[(b)] Use part (a) to show that $\displaystyle p(t_{n} \mid \mathbf{x}_{n},\mathbf{X, t}) = p(t_n \mid \mathbf{x}_n).$
+    \end{enumerate}
+    \textit{Hint:} Use Problem 1.
+\end{envsection}
+
+\begin{envsection}{Problem 3 (Hessian Matrix).}
+    For a vector-valued function $f: \R^n \to \R^m$, we often denote $f$ by its \textit{component functions} $f_i: \R^n \to \R$, where $f(x) = [f_1(x)\; \cdots\; f_m(x)]^T$. We define $f$'s \textit{Jacobian} at a point $a \in \R^n$ to be the matrix containing the partial derivatives of its component functions at $a$:
+    \[
+    J_f(a) = 
+    \begin{bmatrix}
+        \frac{\partial f_1}{\partial x_1}(a) & \cdots & \frac{\partial f_1}{\partial x_n}(a)\\
+        \vdots & \ddots & \vdots\\
+        \frac{\partial f_m}{\partial x_1}(a) & \cdots & \frac{\partial f_m}{\partial x_n}(a)\\
+    \end{bmatrix} 
+    =
+    \begin{bmatrix}
+        \nabla f_1(a)^T\\
+        \vdots\\
+        \nabla f_m(a)^T
+    \end{bmatrix}
+    \]
+    For a real-valued function $f: \R^n \to \R$, as in Comment 2.6 of R+G, we define its \textit{Hessian} at the point $a \in \R^n$ to be the $n \times n$ matrix
+    \[
+    H_f(a) = 
+    \begin{bmatrix}
+        \frac{\partial^2 f}{\partial x_1^2}(a) & \cdots & \frac{\partial^2 f}{\partial x_1\partial x_n}(a)\\
+        \vdots & \ddots & \vdots\\
+        \frac{\partial^2 f}{\partial x_n \partial x_1}(a) & \cdots & \frac{\partial^2 f}{\partial x_n^2}(a)\\
+    \end{bmatrix}.
+    \]
+    \begin{enumerate}
+        \item[(a)] Convince yourself that $H_f(a) = J_{\nabla f}(a)$. That is, that the Hessian is the Jacobian of the gradient.
+        \item[(b)] Fix $A \in M_{m \times n}$ and $b \in \R^m$ and define $f: \R^n \to \R^m$ by $f(x) = Ax + b$. Prove that $J_f(a) = A$ for every $a \in \R^n$.
+        \item[(c)] Here, we assume the same setup as Problem 4 of Homework 1. The log likelihood is then defined as
+            \[
+            \log L = -N \log \sigma - \frac{N}{2} \log 2\pi - \frac{1}{2\sigma^2} \sum_{n=1}^{N}(y^{(n)} - \theta^Tx^{(n)})^2.
+            \]
+            Taking $\log L$ to be a function of $\theta$, show that $\nabla_\theta \log L = \frac{1}{\sigma^2}(X^Ty - X^TX\theta)$. Use this identity and parts (a) and (b) to verify Equation 2.38:
+            \[
+            H_{\log L}(\theta) = - \frac{1}{\sigma^2} X^TX.
+            \]
+    \end{enumerate}
+\end{envsection}
+
+
+\subsection*{Coding}
+
+Go make an account on \href{https://www.tensortonic.com/problems}{TensorTonic}. This looks like a super cool resource to practice coding up some ML concepts. They also have some modules under ``ML Math'' that you might be interested to look at to supplement your own learning. Take some time to explore! Below are some problems you should take a look at. You don't need to do all of them---feel free to pick and choose. Take this as an opportunity to start learning some basic \href{https://numpy.org/doc/stable/}{numpy}.
+
+\begin{envsection}{1. Linear Algebra.}
+    \href{https://www.tensortonic.com/problems/dot-product}{Implement Dot Product} (Easy), \href{https://www.tensortonic.com/problems/euclidean-distance}{Implement Euclidean Distance} (Easy), \href{https://www.tensortonic.com/problems/matrix-transpose}{Matrix Transpose} (Easy), \href{https://www.tensortonic.com/problems/matrix-inverse}{Matrix Inverse} (Medium).
+    % \hspace{0pt}
+    % \begin{enumerate}
+    %     \item[1.] \href{https://www.tensortonic.com/problems/dot-product}{Implement Dot Product} (Easy)
+    %     \item[2.] \href{https://www.tensortonic.com/problems/euclidean-distance}{Implement Euclidean Distance} (Easy)
+    %     \item[3.] \href{https://www.tensortonic.com/problems/matrix-transpose}{Matrix Transpose} (Easy)
+    %     \item[4.] \href{https://www.tensortonic.com/problems/matrix-inverse}{Matrix Inverse} (Medium)
+    % \end{enumerate}
+\end{envsection}
+
+\begin{envsection}{2. Basic ML.}
+    \href{https://www.tensortonic.com/problems/mean-squared-error}{Mean Squared Error (MSE)} (Easy), \href{https://www.tensortonic.com/problems/gradient-descent-quadratic}{Implement Gradient Descent for a 1D Quadratic} (Easy), \href{https://www.tensortonic.com/problems/linear-regression-closed-form}{Linear Regression Closed Form} (Medium).
+    % \hspace{0pt}
+    % \begin{enumerate}
+    %     \item[1.] \href{https://www.tensortonic.com/problems/mean-squared-error}{Mean Squared Error (MSE)} (Easy)
+    %     \item[2.] \href{https://www.tensortonic.com/problems/gradient-descent-quadratic}{Implement Gradient Descent for a 1D Quadratic} (Easy)
+    %     \item[3.] \href{https://www.tensortonic.com/problems/linear-regression-closed-form}{Linear Regression Closed Form} (Medium)
+    % \end{enumerate}
+\end{envsection}
+
 
 \subsection*{Fun Stuff}
 
