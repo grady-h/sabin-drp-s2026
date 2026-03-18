@@ -1,0 +1,72 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx, amsmath, amsthm, amssymb, enumitem, lipsum, hyperref}
+
+\setlist[enumerate]{leftmargin=1.25cm}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\rotvert}{\rotatebox[origin=c]{90}{$\vert$}}
+
+\newenvironment{note}[2][Note]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{fact}[2][Fact]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{definition}[2][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{proposition}[2][Proposition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{principle}[2][Principle]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{envsection}[1]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+
+\begin{document}
+\setlength{\abovedisplayskip}{4pt}
+\setlength{\belowdisplayskip}{4pt}
+
+
+\begin{center}
+    \Large{\textbf{Homework 5}}\\
+    \normalsize March 12 - 19
+\end{center}
+\vspace{10pt}
+
+\subsection*{Reading}
+
+\begin{envsection}{1. Speech and Language Processing:}
+    I added this book to the GitHub. Start reading Chapter 3: $N$-gram Language Models. This section will put MLE in the context of natural language processing, so it should feel pretty natural after our linear regression discussion.
+\end{envsection}
+
+\subsection*{Problems}
+
+\begin{envsection}{Problem 1.}
+    Use induction to prove the \textit{chain rule of probability}: For $n$ random variables $X_1,\dots,X_n$,
+    \[
+    P(X_1,\dots,X_n) = \prod_{k=1}^{n} P(X_k \mid X_{1:k-1}).
+    \]
+    (Here, $X_{1:k-1}$ refers to the joint distribution $X_1,\dots,X_{k-1}$).
+\end{envsection}
+
+
+\end{document}
