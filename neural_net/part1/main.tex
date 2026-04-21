@@ -1,0 +1,131 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx, amsmath, amsthm, amssymb, enumitem, lipsum, hyperref}
+
+\setlist[enumerate]{leftmargin=1.25cm}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\rotvert}{\rotatebox[origin=c]{90}{$\vert$}}
+
+\newenvironment{note}[2][Note]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{fact}[2][Fact]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{definition}[2][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{proposition}[2][Proposition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{principle}[2][Principle]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{envsection}[1]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+
+\begin{document}
+\setlength{\abovedisplayskip}{4pt}
+\setlength{\belowdisplayskip}{4pt}
+
+
+\begin{center}
+    \Large{\textbf{A Neural Net From Scratch}}\\
+    \vspace{1ex}
+    \normalsize \textsc{Part I}
+\end{center}
+\vspace{10pt}
+
+% \subsection*{Reading}
+
+% \begin{envsection}{1. Prince, Understanding Deep Learning:}
+%     Chapters 3--4, 7. New book I've added to the GitHub. I think it will be good for us to spend time in this book to go a bit more in-depth on neural nets than the speech + language processing book does. 
+% \end{envsection}
+
+\noindent Over the next few assignments, you will develop and train a feedforward neural network to classify the MNIST handwritten digit dataset. We're going to be using Kaggle's \href{https://www.kaggle.com/competitions/digit-recognizer}{Digit Recognizer} competition as our point of reference---by the end of this you should have a model you can submit to the contest. To start, read the dataset description on the site to understand how each image is represented and how the data will be presented to you. Then, move on to the problems.
+
+
+\begin{envsection}{Problem 1 (Network Architecture).}
+    Your network will need to take in a vector $x \in \R^{784}$ representing an image and output a vector $\hat{y} \in \R^{10}$ containing the label (0-9) probabilities for $x$. Our simple shallow network architecture can be modeled as follows:
+    \begin{align*}
+        % a^{[0]} &= x\\
+        z^{[1]} &= W^{[1]}x + b^{[1]}\\
+        a^{[1]} &= \text{ReLU}(z^{[1]})\\
+        z^{[2]} &= W^{[2]}a^{[1]} + b^{[2]}\\
+        \hat{y} &= \text{softmax}(z^{[2]})
+    \end{align*}
+    If the dimension of our hidden layer has width $D_1$, what dimensions will the weight matrices $W^{[1]}, W^{[2]}$ and bias vectors $b^{[1]}, b^{[2]}$ be? Draw a quick picture.
+\end{envsection}
+
+
+\begin{envsection}{Problem 2 (Backpropogation).}
+    To train your network, you'll use the standard cross-entropy loss. That is, for a predicted output $\hat{y}$,
+    \[
+    \mathcal{L}_{CE}(\hat{y}) = -\sum_{i=1}^{10} y_i \log(\hat{y}_i),
+    \]
+    where $y$ is the corresponding one-hot encoded ground truth vector. To perform our gradient-descent updates, we need to compute the following:
+    \[
+    \frac{\partial\mathcal{L}}{\partial W^{[1]}}, \frac{\partial\mathcal{L}}{\partial W^{[2]}}, \frac{\partial\mathcal{L}}{\partial b^{[1]}}, \frac{\partial\mathcal{L}}{\partial b^{[2]}}.
+    \]
+    Let's use backpropagation to do it!
+    \begin{enumerate}
+        \item[(a)] First, use the chain rule to find expressions for the above gradients in terms of the intermediate functions in our network by stepping backwards through the computational graph:
+            \[
+            \mathcal{L} \overset{\partial}{\longrightarrow} z^{[2]} \overset{\partial}{\longrightarrow} W^{[2]},
+            \]
+            \[
+            \mathcal{L} \overset{\partial}{\longrightarrow} z^{[2]} \overset{\partial}{\longrightarrow} b^{[2]},
+            \]
+            \[
+            \mathcal{L} \overset{\partial}{\longrightarrow} z^{[2]} \overset{\partial}{\longrightarrow} a^{[1]} \overset{\partial}{\longrightarrow} z^{[1]} \overset{\partial}{\longrightarrow} W^{[1]},
+            \]
+            \[
+            \mathcal{L} \overset{\partial}{\longrightarrow} z^{[2]} \overset{\partial}{\longrightarrow} a^{[1]} \overset{\partial}{\longrightarrow} z^{[1]} \overset{\partial}{\longrightarrow} b^{[1]}.
+            \]
+            \textit{Note:} What you're using here is the \textit{multivariable} chain rule. Check it out on the next page.
+        \item[(b)] Now let's compute the first gradient $\frac{\partial\mathcal{L}}{\partial z^{[2]}}$. For simplicity, write $z^{[2]} = z$. Use the chain rule to show that $\frac{\partial\mathcal{L}}{\partial z} = \hat{y} - y$. More precisely, for a fixed $1 \leq k \leq 10$, compute the following partial derivative:
+            \[
+            \frac{\partial\mathcal{L}}{\partial z_k} = \hat{y_k} - y_k.
+            \]
+        \item[(c)] Compute the rest of the intermediate Jacobians and use parts (a) and (b) to obtain specific formulas for the four gradients above. Note that
+            \[
+            \frac{d}{d x} \text{ReLU}(x) = 
+            \begin{cases}
+                1, &x > 0\\
+                0, &x \leq 0.
+            \end{cases}
+            \]
+        \item[(d)] If you have the time, try adding in an additional hidden layer and continuing the calculations further.
+    \end{enumerate}
+\end{envsection}
+
+\noindent Hopefully after doing the math you'll have a bit of an idea of how you might actually start coding some of this up. We'll get started on it next week...
+
+\newpage
+
+\begin{envsection}{Theorem (Chain Rule).}
+    \textit{Let $A \subset \R^m$, $B \subset \R^n$, with $f: A \to \R^n$ and $g: B \to \R^k$ such that $f(A) \subset B$. Suppose $f(a) = b$. If $f$ is differentiable at $a$, and if $g$ is differentiable at $b$, then the composite function $g \circ f$ is differentiable at $a$. Furthermore,
+    \[
+    J_{g \circ f}(a) = J_g(b) \cdot J_f(a).
+    \]}
+\end{envsection}
+
+
+\end{document}
