@@ -8,3 +8,8 @@ homework/*/*
 # allow tex and pdf
 !homework/*/main.pdf
 !homework/*/main.tex
+
+neural_net/part1/*
+# allow tex and pdf
+!neural_net/part1/main.pdf
+!neural_net/part1/main.tex
